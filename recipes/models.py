@@ -11,9 +11,9 @@ class Category(models.Model):
         return self.name
 
 
-class Recipes(models.Model):
+class Recipe(models.Model):
     title = models.CharField(max_length=65)
-    desciption = models.CharField(max_length=65)
+    description = models.CharField(max_length=65)
     slug = models.SlugField()
     preparation_time = models.IntegerField()
     preparation_time_unit = models.CharField(max_length=65)
@@ -27,3 +27,6 @@ class Recipes(models.Model):
     cover = models.ImageField(upload_to='recipes/covers/%Y/%m/%d/')
     category = models.ForeignKey(
         Category, on_delete=models.SET_NULL, null=True)
+
+    def __str__(self) -> str:
+        return self.title
