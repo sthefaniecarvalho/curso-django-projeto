@@ -7,6 +7,9 @@ from django.contrib.auth.models import User
 class Category(models.Model):
     name = models.CharField(max_length=65)
 
+    def __str__(self) -> str:
+        return self.name
+
 
 class Recipes(models.Model):
     title = models.CharField(max_length=65)
@@ -23,4 +26,4 @@ class Recipes(models.Model):
     is_published = models.BooleanField(default=False)
     cover = models.ImageField(upload_to='recipes/covers/%Y/%m/%d/')
     category = models.ForeignKey(
-        Category, on_delete=models.SET_NULL, null=True)  # set_null -> SE CASO NAO EXISTIR MAIS A CATEGORY OS VALORES FICARAM NULL
+        Category, on_delete=models.SET_NULL, null=True)
