@@ -27,10 +27,14 @@ class RecipeViewsTest(RecipeTestBase):
         )
 
     def test_recipe_home_template_loads_recipes(self):
+        # This test needs a recipe
+        self.make_recipe()
+
         response = self.client.get(reverse('recipes:home'))
         content = response.content.decode('utf-8')
         response_context_recipes = response.context['recipes']
 
+        # Check if one recipe exists
         self.assertIn('Recipe Title', content)
         self.assertEqual(len(response_context_recipes), 1)
 
